@@ -14,12 +14,9 @@ public class BoardController : MonoBehaviour
         transform.Rotate(0.0f, xInput * steeringSensitivity * Time.deltaTime, 0.0f);
 
         Vector3 normal = this.NormalUnderneath();
-        Debug.Log("Normal :" + normal);
         Vector3 forwardForce = this.FowardVelocityMagitude(normal, GetDownHillVector(Vector3.up, normal));
         Utils.drawVector(forwardForce, this.transform.position, speed);
         this.ApplyMoveForce(forwardForce);
-
-        Debug.Log(forwardForce);
     }
 
     private void ProcessInputs()
@@ -46,10 +43,8 @@ public class BoardController : MonoBehaviour
         // dot product of the slopes down hill vector and snowboards forward vector.
         // Returns a value between 1 & -1.  1 when going straigt down, -1 when roted 180 degrees. 0 for 90 degrees. 
         float alignment = Vector3.Dot(downHillDirection, transform.forward);
-        Debug.Log("down Hill Vector: " + downHillDirection);
-        Debug.Log("alingment: " + alignment);
         Vector3 v =  alignment * transform.forward * speed;
-        //extend Vector3 class
+        //using extend Vector3 class Round method
         return v.Round(1); 
     }
 
